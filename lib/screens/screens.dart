@@ -6,3 +6,5 @@ export 'package:backgrounds_custom_painter/screens/grafica_circular_screen.dart'
 export 'package:backgrounds_custom_painter/labs/slideshow_screen.dart';
 export 'package:backgrounds_custom_painter/screens/slideshow2_screen.dart';
 export 'package:backgrounds_custom_painter/screens/pinteres_page.dart';
+
+export 'package:backgrounds_custom_painter/screens/emergency_screen.dart';

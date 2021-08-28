@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:backgrounds_custom_painter/screens/screens.dart';
 import 'models/models.dart';
@@ -14,6 +15,7 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => SliderModer()),
         ChangeNotifierProvider(create: (_) => MenuModel()),
+        ChangeNotifierProvider(create: (_) => MedicoProvider()),
       ],
       child: MyApp(),
     );
@@ -26,7 +28,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Disenos App',
-      home: PinteresPage(),
+      home: EmergencyScreen(
+        iconData: FaIcon(
+          FontAwesomeIcons.plus,
+          size: 250,
+          color: Colors.white.withOpacity(0.2),
+        ),
+        subtitulo: 'a',
+        titulo: 'Asaek',
+      ),
     );
   }
 }
