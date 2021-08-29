@@ -8,3 +8,5 @@ export 'package:backgrounds_custom_painter/screens/slideshow2_screen.dart';
 export 'package:backgrounds_custom_painter/screens/pinteres_page.dart';
 
 export 'package:backgrounds_custom_painter/screens/emergency_screen.dart';
+
+export 'package:backgrounds_custom_painter/screens/sliders_list_screen.dart';

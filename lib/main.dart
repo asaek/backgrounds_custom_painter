@@ -28,15 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Disenos App',
-      home: EmergencyScreen(
-        iconData: FaIcon(
-          FontAwesomeIcons.plus,
-          size: 250,
-          color: Colors.white.withOpacity(0.2),
-        ),
-        subtitulo: 'a',
-        titulo: 'Asaek',
-      ),
+      home: SliverListPage(),
     );
   }
 }
