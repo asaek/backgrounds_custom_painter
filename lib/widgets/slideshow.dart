@@ -1,4 +1,5 @@
 import 'package:backgrounds_custom_painter/models/models.dart';
+import 'package:backgrounds_custom_painter/providers/providers.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -82,13 +83,17 @@ class _Dot extends StatelessWidget {
   Widget build(BuildContext context) {
     // final pageViewPosicion = Provider.of<SliderModer>(context).currentPage;
     final slideShowModell = Provider.of<SliderModer>(context);
+    final apptheme = Provider.of<ThemeChanger>(context);
+
     double? tamanoo;
     Color? color;
 
     if (slideShowModell.currentPage >= posicion - 0.5 &&
         slideShowModell.currentPage <= posicion + 0.5) {
       tamanoo = slideShowModell.dotActivo;
-      color = slideShowModell.colorSecundario;
+      color = (apptheme.darkTheme)
+          ? apptheme.currenTheme.accentColor
+          : slideShowModell.colorSecundario;
     } else {
       tamanoo = slideShowModell.dotDesactivado;
       color = slideShowModell.colorPrimario;

@@ -5,27 +5,49 @@ import 'package:flutter_svg/flutter_svg.dart';
 class SlideShowScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // final sizeHeight = MediaQuery.of(context).size.height;
+    bool isToLarge;
+
+    if (MediaQuery.of(context).size.height > 500) {
+      isToLarge = true;
+    } else {
+      isToLarge = false;
+    }
+
     return Scaffold(
-      body: Column(children: [
-        Expanded(child: MiSlideshow()),
-        Expanded(child: MiSlideshow()),
-      ]),
+      body: (isToLarge)
+          ? Column(children: [
+              Expanded(
+                flex: 5,
+                child: MiSlideshow(),
+              ),
+              Expanded(
+                flex: 5,
+                child: MiSlideshow(),
+              ),
+            ])
+          : Row(children: [
+              Expanded(
+                flex: 5,
+                child: MiSlideshow(),
+              ),
+              Expanded(
+                flex: 5,
+                child: MiSlideshow(),
+              ),
+            ]),
     );
   }
 }
 
 class MiSlideshow extends StatelessWidget {
-  const MiSlideshow({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SlideShowList(
       dotActivo: 20,
       dotDesactivado: 10,
       // dotsArriba: true,
-      // colorPrimario: Colors.red,
+      // colorPrimario: Colors.rno pues aed,
       // colorSecundario: Colors.purpleAccent,
       // Con esto puedes enviar lo que quieras mientras sea un Widget
       slidesList: [

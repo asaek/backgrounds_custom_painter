@@ -1,4 +1,6 @@
+import 'package:backgrounds_custom_painter/providers/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SliverListPage extends StatelessWidget {
   @override
@@ -18,18 +20,22 @@ class _BotonNewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    final appTheme = Provider.of<ThemeChanger>(context);
     return ButtonTheme(
       minWidth: size.width * 0.80,
       height: 70,
       child: MaterialButton(
-        color: Color(0xffED6762),
+        color: (appTheme.darkTheme)
+            ? appTheme.currenTheme.accentColor
+            : Color(0xffED6762),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(15))),
         onPressed: () {},
         child: Text(
           'Crear una nueva lista',
           style: TextStyle(
-            color: Colors.white,
+            color: appTheme.currenTheme.scaffoldBackgroundColor,
             fontSize: 18,
             fontWeight: FontWeight.bold,
             letterSpacing: 3,
@@ -62,6 +68,8 @@ class _MainScroll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currenTheme;
+
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       slivers: [
@@ -80,7 +88,7 @@ class _MainScroll extends StatelessWidget {
             minheight: 160,
             maxheight: 190,
             child: Container(
-              color: Colors.white,
+              color: appTheme.scaffoldBackgroundColor,
               child: _Titulo(),
             ),
           ),
@@ -208,11 +216,13 @@ class _ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Container(
       height: 100,
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: colorf,
+        color: (appTheme.darkTheme) ? Colors.grey : colorf,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.symmetric(horizontal: 25),

@@ -15,7 +15,7 @@ class ItemBoton {
 }
 
 class EmergencyScreen extends StatelessWidget {
-  final FaIcon iconData;
+  final IconData iconData;
   final String titulo;
   final String subtitulo;
   final Color? color1;
@@ -34,23 +34,32 @@ class EmergencyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final Color colorBlanco = Colors.white.withOpacity(0.7);
+    bool isToLarge;
+    Future.microtask(
+      () {
+        if (this.color1 != null) {
+          Provider.of<MedicoProvider>(context, listen: false).color1 =
+              this.color1!;
+          Provider.of<MedicoProvider>(context, listen: false).color2 =
+              this.color2!;
+        }
+        if (this.cruzColor != null) {
+          Provider.of<MedicoProvider>(context, listen: false).cruzColor =
+              this.cruzColor!;
+        }
+        Provider.of<MedicoProvider>(context, listen: false).titulo =
+            this.titulo;
+        Provider.of<MedicoProvider>(context, listen: false).subTitulo =
+            this.subtitulo;
+        print(titulo);
+      },
+    );
 
-    Future.microtask(() {
-      if (this.color1 != null) {
-        Provider.of<MedicoProvider>(context, listen: false).color1 =
-            this.color1!;
-        Provider.of<MedicoProvider>(context, listen: false).color2 =
-            this.color2!;
-      }
-      if (this.cruzColor != null) {
-        Provider.of<MedicoProvider>(context, listen: false).cruzColor =
-            this.cruzColor!;
-      }
-      Provider.of<MedicoProvider>(context, listen: false).titulo = this.titulo;
-      Provider.of<MedicoProvider>(context, listen: false).subTitulo =
-          this.subtitulo;
-      print(titulo);
-    });
+    if (MediaQuery.of(context).size.height > 500) {
+      isToLarge = true;
+    } else {
+      isToLarge = false;
+    }
 
     final items = <ItemBoton>[
       new ItemBoton(FontAwesomeIcons.carCrash, 'Motor Accident',
@@ -100,13 +109,14 @@ class EmergencyScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 250),
+            margin: EdgeInsets.only(top: (isToLarge) ? 310 : 10),
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: [
-                // SizedBox(
-                //   height: 250,
-                // ),
+                if (isToLarge)
+                  SizedBox(
+                    height: 250,
+                  ),
 
                 //Operador Spread
                 ...itemMap
@@ -115,7 +125,12 @@ class EmergencyScreen extends StatelessWidget {
           ),
           // TODO arreglar como le envio los parametros al header ya que lo esty haciendo por provider
           // TODO pero no hay como darselos al provider jajajaja
-          HeaderEmemregency(),
+
+          // if (isToLarge) {
+
+          // } else {
+          // }
+          if (isToLarge) HeaderEmemregency(),
         ],
       ),
       // backgroundColor: Colors.amberAccent,

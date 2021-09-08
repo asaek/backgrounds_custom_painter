@@ -22,18 +22,26 @@ class PinteresPage extends StatelessWidget {
 class _PinteresMenuLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final widthPantalla = MediaQuery.of(context).size.width;
-    final tamano = MediaQuery.of(context).size;
+    double widthPantalla = MediaQuery.of(context).size.width;
+
+    if (widthPantalla > 500) {
+      widthPantalla = MediaQuery.of(context).size.width -
+          (MediaQuery.of(context).size.width * .28);
+    }
+
+    // print('Ancho pinteres:  $widthPantalla');
     // print('Ancho: ${tamano.width}');
     // print('Alto: ${tamano.height}');
     // print('Centro: ${tamano.center(Offset(0, 0))}');
-
+    final appTheme = Provider.of<ThemeChanger>(context).currenTheme;
     return Positioned(
       bottom: 30,
       child: Container(
         width: widthPantalla,
         child: Align(
           child: BarMenuPinterest(
+            backgroundColor: appTheme.scaffoldBackgroundColor,
+            activeColor: appTheme.accentColor,
             items: [
               PinteresButton(
                   iconns: Icons.pie_chart,
@@ -108,14 +116,21 @@ class __PinteresWidgetState extends State<_PinteresWidget> {
   @override
   Widget build(BuildContext context) {
     // este es el grip del widget plugin de yaml
+    int cantidadColumnas;
+    if (MediaQuery.of(context).size.width > 500) {
+      cantidadColumnas = 3;
+    } else {
+      cantidadColumnas = 2;
+    }
+
     return new StaggeredGridView.countBuilder(
       controller: controller,
-      crossAxisCount: 4,
+      crossAxisCount: cantidadColumnas,
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) =>
           ConteinerForGrid(index: index),
       staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 2 : 2),
+          new StaggeredTile.count(1, index.isEven ? 1 : 2),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
     );
@@ -129,6 +144,8 @@ class ConteinerForGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currenTheme;
+
     return new Container(
         decoration: BoxDecoration(
           color: Colors.green,
@@ -137,7 +154,7 @@ class ConteinerForGrid extends StatelessWidget {
         margin: EdgeInsets.all(5),
         child: new Center(
           child: new CircleAvatar(
-            backgroundColor: Colors.white,
+            backgroundColor: appTheme.scaffoldBackgroundColor,
             child: new Text('$index'),
           ),
         ));
